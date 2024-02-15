@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --swiper-navigation-color: black !important;
+}
+
+[type='text']:focus {
+  box-shadow: none;
+}
+
+.v-messages__message {
+  @apply tw-mb-4;
+}
