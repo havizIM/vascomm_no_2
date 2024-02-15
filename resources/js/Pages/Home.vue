@@ -18,6 +18,17 @@ const prev = () => {
     bannerCount.value =
         bannerCount.value - 1 <= length.value ? 1 : bannerCount.value - 1;
 };
+
+defineProps({
+    newestProduct: {
+        type: Array,
+    },
+    summaryProduct: {
+        type: Array,
+    },
+});
+
+const makeCurrency = (number) => Math.round(number).toLocaleString("id");
 </script>
 
 <template>
@@ -75,7 +86,7 @@ const prev = () => {
                         class="product-swiper tw-relative"
                     >
                         <swiper-slide
-                            v-for="n in 10"
+                            v-for="(item, n) in newestProduct"
                             :key="n"
                             class="tw-h-auto"
                         >
@@ -86,20 +97,16 @@ const prev = () => {
                                     class="tw-flex tw-justify-center tw-items-center"
                                 >
                                     <img
-                                        :src="
-                                            n === 1
-                                                ? '/images/sample/product-1.png'
-                                                : '/images/sample/product-2.png'
-                                        "
+                                        :src="item.image"
                                         class="tw-w-[150px] tw-h-[150px] tw-object-cover"
                                     />
                                 </div>
                                 <div class="tw-mt-8">
-                                    <div>Euodia</div>
+                                    <div>{{ item.name }}</div>
                                     <div
                                         class="tw-text-primary tw-font-semibold"
                                     >
-                                        IDR 20.000
+                                        IDR {{ makeCurrency(item.price) }}
                                     </div>
                                 </div>
                             </div>
@@ -115,24 +122,20 @@ const prev = () => {
 
                 <div class="tw-grid tw-grid-cols-5 tw-gap-4">
                     <div
-                        v-for="n in 10"
+                        v-for="(item, n) in summaryProduct"
                         :key="n"
                         class="hover:tw-border hover:tw-border-gray-500 hover:tw-shadow-2xl tw-px-4 tw-py-8 tw-h-full tw-cursor-pointer"
                     >
                         <div class="tw-flex tw-justify-center tw-items-center">
                             <img
-                                :src="
-                                    n === 1
-                                        ? '/images/sample/product-1.png'
-                                        : '/images/sample/product-2.png'
-                                "
+                                :src="item.image"
                                 class="tw-w-[150px] tw-h-[150px] tw-object-cover"
                             />
                         </div>
                         <div class="tw-mt-8">
-                            <div>Euodia</div>
+                            <div>{{ item.name }}</div>
                             <div class="tw-text-primary tw-font-semibold">
-                                IDR 20.000
+                                IDR {{ makeCurrency(item.price) }}
                             </div>
                         </div>
                     </div>
